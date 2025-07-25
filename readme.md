@@ -141,7 +141,7 @@ Authorization: Bearer <your_jwt_token>
 
 You can test the API using:
 - **Swagger UI**: Visit `http://localhost:8080/api-docs` for interactive testing
-- **Postman**: Import the OpenAPI spec from `/api-docs`
+- **Postman**: Import the OpenAPI spec from `/api-docs-json` or use existing postman collection `InventoryAPI.postman_collection.json` 
 - **Python Script**: Use the included `test_api.py` script
 
 ## 📁 Project Structure
