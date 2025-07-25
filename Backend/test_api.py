@@ -1,6 +1,6 @@
 import requests
 
-BASE_URL = "http://localhost:8080"  # Change this to your API base URL
+BASE_URL = "http://localhost:8080/api"  # Change this to your API base URL
 
 def print_result(test_name, passed, expected=None, got=None, request_data=None, response_body=None):
 	"""

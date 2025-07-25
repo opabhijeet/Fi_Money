@@ -8,7 +8,9 @@ export default async (req, res) => {
     }
     try { 
         const p = await Product.create(req.body); 
-        res.status(201).json(p); 
+        const productObj = p.toObject();
+        productObj.product_id = p._id;
+        res.status(201).json(productObj); 
     }
     catch (e) { 
         res.status(409).json({ msg: 'Duplicate SKU' }); 
