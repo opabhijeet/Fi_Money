@@ -7,6 +7,7 @@ import register from './controllers/auth/register.js';
 import add_product from './controllers/product/add_product.js';
 import update_product from './controllers/product/update_product.js';
 import get_products from './controllers/product/get_products.js';
+import get_analytics from './controllers/analytics/get_analytics.js';
 
 const r = express.Router();
 
@@ -239,5 +240,48 @@ r.put('/products/:id/quantity',
  */
 
 r.get('/products', get_products);
+
+/**
+ * @openapi
+ * /api/analytics:
+ *   get:
+ *     summary: Get analytics data
+ *     tags: [Analytics]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Analytics data
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 users:
+ *                   type: integer
+ *                   example: 12
+ *                 products:
+ *                   type: integer
+ *                   example: 34
+ *                 lowStockAlerts:
+ *                   type: integer
+ *                   example: 3
+ *                 totalInventoryValue:
+ *                   type: number
+ *                   format: float
+ *                   example: 12345.67
+ *                 mostAddedProduct:
+ *                   type: object
+ *                   nullable: true
+ *                   properties:
+ *                     name:
+ *                       type: string
+ *                       example: Widget
+ *                     totalQuantity:
+ *                       type: integer
+ *                       example: 42
+ */
+
+r.get('/analytics', get_analytics);
 
 export default r;
