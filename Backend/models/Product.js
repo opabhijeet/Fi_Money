@@ -1,4 +1,5 @@
 import mongoosePaginate from 'mongoose-paginate-v2';
+import mongoose from 'mongoose';
 
 const productSchema = new mongoose.Schema({
   name: { 

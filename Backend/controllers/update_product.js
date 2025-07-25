@@ -1,5 +1,4 @@
-import Product from "../models/Product";
-import { validationResult } from 'express-validator';
+import Product from "../models/Product.js";
 
 export default async (req, res) => {
     const p = await Product.findByIdAndUpdate(req.params.id,
