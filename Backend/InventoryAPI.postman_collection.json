@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "50b609ac-d0c0-4db4-8210-46286d715168",
+		"_postman_id": "d2d728d4-0dd7-46b4-a3ae-fea9df9fff9f",
 		"name": "Inventory API",
 		"description": "CRUD inventory service with JWT auth",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
@@ -296,7 +296,7 @@
 													"variable": [
 														{
 															"key": "id",
-															"value": "esse ipsum dolore",
+															"value": "string",
 															"description": "(Required) MongoDB ObjectId of the product"
 														}
 													]
@@ -547,7 +547,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/api/products?page=1&limit=10&search=esse ipsum dolore",
+									"raw": "{{baseUrl}}/api/products?page=1&limit=10&search=string",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -568,7 +568,7 @@
 										},
 										{
 											"key": "search",
-											"value": "esse ipsum dolore",
+											"value": "string",
 											"description": "Full-text search string"
 										}
 									]
@@ -591,7 +591,7 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseUrl}}/api/products?page=1&limit=10&search=esse ipsum dolore",
+											"raw": "{{baseUrl}}/api/products?page=1&limit=10&search=string",
 											"host": [
 												"{{baseUrl}}"
 											],
@@ -612,7 +612,7 @@
 												},
 												{
 													"key": "search",
-													"value": "esse ipsum dolore",
+													"value": "string",
 													"description": "Full-text search string"
 												}
 											]
@@ -629,6 +629,61 @@
 									],
 									"cookie": [],
 									"body": "{\n  \"docs\": [\n    {\n      \"name\": \"Phone\",\n      \"price\": 999.99,\n      \"type\": \"Electronics\",\n      \"sku\": \"PHN-001\",\n      \"imageUrl\": \"https://ex.com/phone.jpg\",\n      \"description\": \"Latest Phone\",\n      \"quantity\": 5,\n      \"_id\": \"661eaffb4b1e8c261fdfc9e2\"\n    },\n    {\n      \"name\": \"Phone\",\n      \"price\": 999.99,\n      \"type\": \"Electronics\",\n      \"sku\": \"PHN-001\",\n      \"imageUrl\": \"https://ex.com/phone.jpg\",\n      \"description\": \"Latest Phone\",\n      \"quantity\": 5,\n      \"_id\": \"661eaffb4b1e8c261fdfc9e2\"\n    }\n  ],\n  \"totalDocs\": 42,\n  \"limit\": 10,\n  \"page\": 1,\n  \"totalPages\": 5\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "analytics",
+					"item": [
+						{
+							"name": "Get analytics data",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{bearerToken}}"
+									}
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": "{{baseUrl}}/api/analytics"
+							},
+							"response": [
+								{
+									"name": "Analytics data",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer <token>",
+												"description": "Added as a part of security scheme: bearer"
+											}
+										],
+										"url": "{{baseUrl}}/api/analytics"
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"users\": 12,\n  \"products\": 34,\n  \"lowStockAlerts\": 3,\n  \"totalInventoryValue\": 12345.67,\n  \"mostAddedProduct\": {\n    \"name\": \"Widget\",\n    \"totalQuantity\": 42\n  }\n}"
 								}
 							]
 						}
