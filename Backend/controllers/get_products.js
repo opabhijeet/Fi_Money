@@ -8,5 +8,5 @@ export default async (req, res) => {
   };
   const q = search ? { $text: { $search: search } } : {};
   const products = await Product.paginate(q, options);
-  res.json(products);
+  res.json(products.docs);
 }
