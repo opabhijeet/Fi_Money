@@ -1,5 +1,5 @@
 import express from 'express';
-import { body, param, validationResult } from 'express-validator';
+import { body, param } from 'express-validator';
 import * as Auth from './lib/auth.js';
 
 import login from './controllers/login.js';
@@ -82,7 +82,7 @@ r.post('/login',
  * @openapi
  * /api/register:
  *   post:
- *     summary User registration
+ *     summary: User registration
  *     description: Creates a new user account and returns its identifier.
  *     tags: [Auth]
  *     requestBody:
