@@ -9,7 +9,6 @@ import {
 } from '@heroicons/react/24/outline';
 import { useAuth } from '../contexts/AuthContext';
 import { useState } from 'react';
-import ThemeToggle from './ThemeToggle';
 
 const navigation = [
   { name: 'Dashboard', href: '/', icon: HomeIcon },
@@ -93,7 +92,6 @@ function Layout({ children }) {
             </button>
             
             <div className="flex items-center space-x-4">
-              <ThemeToggle />
               <button
                 onClick={handleLogout}
                 className="flex items-center space-x-2 p-2 rounded-md text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"

@@ -63,6 +63,11 @@ class ApiService {
     const response = await this.api.put(`/products/${productId}/quantity`, { quantity });
     return response.data;
   }
+
+  async getAnalytics() {
+    const response = await this.api.get('/analytics');
+    return response.data;
+  }
 }
 
 export default new ApiService();
