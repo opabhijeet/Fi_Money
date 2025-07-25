@@ -2,11 +2,11 @@ import express from 'express';
 import { body, param } from 'express-validator';
 import * as Auth from './lib/auth.js';
 
-import login from './controllers/login.js';
-import register from './controllers/register.js';
-import add_product from './controllers/add_product.js';
-import update_product from './controllers/update_product.js';
-import get_products from './controllers/get_products.js';
+import login from './controllers/auth/login.js';
+import register from './controllers/auth/register.js';
+import add_product from './controllers/product/add_product.js';
+import update_product from './controllers/product/update_product.js';
+import get_products from './controllers/product/get_products.js';
 
 const r = express.Router();
 

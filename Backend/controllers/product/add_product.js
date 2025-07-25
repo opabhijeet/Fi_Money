@@ -1,5 +1,5 @@
 import { validationResult } from 'express-validator';
-import Product from '../models/Product.js';
+import Product from '../../models/Product.js';
 
 export default async (req, res) => {
     const valErr = validationResult(req);

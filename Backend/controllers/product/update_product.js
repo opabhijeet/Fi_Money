@@ -1,4 +1,4 @@
-import Product from "../models/Product.js";
+import Product from "../../models/Product.js";
 
 export default async (req, res) => {
     const p = await Product.findByIdAndUpdate(req.params.id,

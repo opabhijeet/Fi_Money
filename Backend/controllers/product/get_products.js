@@ -1,4 +1,4 @@
-import Product from "../models/Product.js";
+import Product from "../../models/Product.js";
 
 export default async (req, res) => {
   const { page = 1, limit = 10, search = '' } = req.query;
