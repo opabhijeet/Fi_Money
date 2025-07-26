@@ -1,6 +1,6 @@
 # Fi Money - Inventory Management System
 
-An inventory management application with JWT authentication, built with Node.js, Express, and MongoDB.
+A full-stack inventory management application with JWT authentication, built with Node.js, Express, MongoDB, React, and Tailwind CSS.
 
 ## 🚀 Features
 
@@ -27,11 +27,28 @@ An inventory management application with JWT authentication, built with Node.js,
   - CORS support
   - Environment variable configuration
 
-### 🚧 In Progress
-- Admin portal
-- Basic analytics (e.g., most added products)
-- Basic frontend with React or Vue
-- Dockerize the application
+### Frontend
+- **Modern React Application**
+  - Built with Vite for fast development and builds
+  - Responsive design with Tailwind CSS
+  - Context-based state management
+
+- **User Interface**
+  - Clean, professional dashboard with statistics
+  - Intuitive authentication forms
+  - Mobile-responsive navigation
+
+- **User Experience**
+  - Protected routes with authentication
+  - Loading states and error handling
+
+### 🚧 Future Enhancements
+- Advanced analytics and reporting
+- Product categories and filtering
+- Image upload functionality
+- Inventory alerts for low stock
+- User roles and permissions
+- Docker containerization
 
 ## 🛠️ Tech Stack
 
@@ -44,11 +61,17 @@ An inventory management application with JWT authentication, built with Node.js,
 - **Documentation**: Swagger UI + OpenAPI 3.0
 - **Security**: bcrypt for password hashing
 
-### Frontend (Planned)
+### Frontend
+- **Framework**: React 19 with Vite
+- **Styling**: Tailwind CSS v4
+- **Routing**: React Router DOM
+- **HTTP Client**: Axios with interceptors
+- **Icons**: Heroicons
+- **State Management**: React Context API
 
 ## 📋 Prerequisites
 
-- Node.js (v14 or higher)
+- Node.js (v18 or higher)
 - MongoDB (local or cloud instance)
 - npm or yarn package manager
 
@@ -87,6 +110,45 @@ An inventory management application with JWT authentication, built with Node.js,
 5. **Access the application**
    - API Base URL: `http://localhost:8080/api`
    - API Documentation: `http://localhost:8080/api-docs`
+
+### Frontend Setup
+
+1. **Navigate to the Frontend directory**
+   ```bash
+   cd ../Frontend
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Start the development server**
+   ```bash
+   npm run dev
+   ```
+
+4. **Access the application**
+   - Frontend URL: `http://localhost:3000`
+   - The frontend will proxy API requests to the backend server
+
+### Running Both Servers
+
+For the complete application, you need to run both servers:
+
+1. **Terminal 1 - Backend**:
+   ```bash
+   cd Backend
+   npm run dev
+   ```
+
+2. **Terminal 2 - Frontend**:
+   ```bash
+   cd Frontend  
+   npm run dev
+   ```
+
+Then visit `http://localhost:3000` to use the full application.
 
 ## 📚 API Endpoints
 
@@ -139,6 +201,7 @@ Authorization: Bearer <your_jwt_token>
 
 ## 🧪 Testing
 
+### API Testing
 You can test the API using:
 - **Swagger UI**: Visit `http://localhost:8080/api-docs` for interactive testing
 - **Postman**: Import the OpenAPI spec from `/api-docs-json` or use existing postman collection `InventoryAPI.postman_collection.json` 
@@ -148,24 +211,51 @@ You can test the API using:
 
 ```
 Fi_Money/
-├── Backend/
-│   ├── controllers/          # Route handlers
-│   │   ├── add_product.js
-│   │   ├── get_products.js
-│   │   ├── login.js
-│   │   ├── register.js
-│   │   └── update_product.js
+├── Backend/                 # Express.js API Server
+│   ├── controllers/         # Route handlers
+│   │   ├── auth/
+│   │   │   ├── login.js
+│   │   │   └── register.js
+│   │   ├── product/
+│   │   │   ├── add_product.js
+│   │   │   ├── get_products.js
+│   │   │   └── update_product.js
+│   │   └── analytics/
+│   │       └── get_analytics.js
 │   ├── lib/
 │   │   └── auth.js          # Authentication middleware
 │   ├── models/              # Mongoose models
 │   │   ├── Product.js
 │   │   └── User.js
-│   ├── routes.js           # API routes definition
-│   ├── server.js           # Express server setup
-│   ├── swagger.js          # Swagger configuration
+│   ├── routes.js            # API routes definition
+│   ├── server.js            # Express server setup
+│   ├── swagger.js           # Swagger configuration
 │   ├── package.json
-│   └── test_api.py         # API testing script
-├── Frontend/               # 🚧 In Progress
+│   └── test_api.py          # API testing script
+├── Frontend/                # React Application
+│   ├── public/
+│   ├── src/
+│   │   ├── components/      # Reusable React components
+│   │   │   ├── Layout.jsx
+│   │   │   ├── ThemeToggle.jsx
+│   │   │   └── ProtectedRoute.jsx
+│   │   ├── contexts/        # React Context providers
+│   │   │   ├── AuthContext.jsx
+│   │   │   └── ThemeContext.jsx
+│   │   ├── pages/           # Page components
+│   │   │   ├── Login.jsx
+│   │   │   ├── Register.jsx
+│   │   │   ├── Dashboard.jsx
+│   │   │   ├── Products.jsx
+│   │   │   └── Analytics.jsx
+│   │   ├── services/        # API service layer
+│   │   │   └── api.js
+│   │   ├── App.jsx          # Main App component
+│   │   ├── main.jsx         # React entry point
+│   │   └── index.css        # Tailwind CSS imports
+│   ├── package.json
+│   ├── vite.config.js       # Vite configuration
+│   └── tailwind.config.js   # Tailwind CSS configuration
 └── README.md
 ```
 
@@ -189,6 +279,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 🙏 Acknowledgments
 
 - Express.js for the robust web framework
+- React and Vite for the modern frontend development experience
+- Tailwind CSS for rapid and responsive UI development
 - MongoDB for flexible document storage
 - Swagger for excellent API documentation
 - JWT for secure authentication
