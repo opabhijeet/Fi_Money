@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { 
   PlusIcon, 
   MagnifyingGlassIcon,
@@ -7,6 +7,23 @@ import {
 } from '@heroicons/react/24/outline';
 import ApiService from '../services/api';
 import AddProductModal from '../components/AddProduct.jsx';
+
+// Custom hook for debouncing
+function useDebounce(value, delay) {
+  const [debouncedValue, setDebouncedValue] = useState(value);
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedValue(value);
+    }, delay);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [value, delay]);
+
+  return debouncedValue;
+}
 
 function Products() {
   const [products, setProducts] = useState([]);
@@ -17,14 +34,24 @@ function Products() {
   const [showAddModal, setShowAddModal] = useState(false);
   const [editingProduct, setEditingProduct] = useState(null);
 
+  // Debounce search term with 500ms delay
+  const debouncedSearchTerm = useDebounce(searchTerm, 500);
+
   useEffect(() => {
     fetchProducts();
-  }, [currentPage, searchTerm]);
+  }, [currentPage, debouncedSearchTerm]); // Use debounced search term
+
+  // Reset to first page when search term changes
+  useEffect(() => {
+    if (debouncedSearchTerm !== searchTerm) {
+      setCurrentPage(1);
+    }
+  }, [debouncedSearchTerm, searchTerm]);
 
   const fetchProducts = async () => {
     try {
       setLoading(true);
-      const data = await ApiService.getProducts(currentPage, 10, searchTerm);
+      const data = await ApiService.getProducts(currentPage, 10, debouncedSearchTerm);
       setProducts(data || []);
       setTotalPages(data.totalPages || 1);
     } catch (error) {
@@ -36,7 +63,6 @@ function Products() {
 
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
-    setCurrentPage(1);
   };
 
   const handleUpdateQuantity = async (productId, newQuantity) => {
@@ -47,14 +73,6 @@ function Products() {
       console.error('Error updating quantity:', error);
     }
   };
-
-  if (loading && products.length === 0) {
-    return (
-      <div className="flex items-center justify-center h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
-      </div>
-    );
-  }
 
   return (
     <div className="space-y-6">
@@ -82,12 +100,23 @@ function Products() {
             className="input-field pl-10"
             placeholder="Search products..."
           />
+          {/* Loading indicator for search */}
+          {searchTerm !== debouncedSearchTerm && (
+            <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
+              <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-gray-400"></div>
+            </div>
+          )}
         </div>
       </div>
 
       {/* Products Table */}
       <div className="card">
-        {products.length > 0 ? (
+        {loading && products.length === 0 && (
+          <div className="flex items-center justify-center py-20">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600"></div>
+          </div>
+        )}
+        {!loading && (products.length > 0 ? (
           <>
             <div className="overflow-x-auto">
               <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
@@ -200,10 +229,10 @@ function Products() {
             </svg>
             <h3 className="mt-2 text-sm font-medium text-gray-900 dark:text-white">No products found</h3>
             <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-              {searchTerm ? 'Try adjusting your search terms.' : 'Get started by adding a new product.'}
+              {debouncedSearchTerm ? 'Try adjusting your search terms.' : 'Get started by adding a new product.'}
             </p>
           </div>
-        )}
+        ))}
       </div>
 
       {/* Add/Edit Product Modal would go here */}
