@@ -6,7 +6,7 @@ import router   from './routes.js';
 import swaggerUi from 'swagger-ui-express';
 import {swaggerSpec} from './swagger.js';
 
-await mongoose.connect(process.env.MONGO_URL || 'mongodb://localhost:27017/inventory');
+await mongoose.connect(process.env.MONGO_URL || 'mongodb://mongodb:27017/inventory');
 
 const app = express();
 app.use(cors());
