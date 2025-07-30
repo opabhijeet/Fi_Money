@@ -2,6 +2,7 @@
 
 A fully containerized full-stack inventory management application with JWT authentication, built with Node.js, Express, MongoDB, React, and Tailwind CSS. Deploy with Docker Compose in minutes!
 
+![alt text](docker.png)
 ## 🚀 Features
 
 ### Backend
