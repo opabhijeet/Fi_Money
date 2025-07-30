@@ -1,6 +1,6 @@
 # Fi Money - Inventory Management System
 
-A full-stack inventory management application with JWT authentication, built with Node.js, Express, MongoDB, React, and Tailwind CSS.
+A fully containerized full-stack inventory management application with JWT authentication, built with Node.js, Express, MongoDB, React, and Tailwind CSS. Deploy with Docker Compose in minutes!
 
 ## 🚀 Features
 
@@ -42,13 +42,21 @@ A full-stack inventory management application with JWT authentication, built wit
   - Protected routes with authentication
   - Loading states and error handling
 
+### Deployment
+- **Docker Containerization**
+  - Multi-stage Docker builds for optimized images
+  - Docker Compose for orchestrating all services
+  - Production-ready Nginx serving for frontend
+  - Isolated database with persistent volumes
+
 ### 🚧 Future Enhancements
 - Advanced analytics and reporting
 - Product categories and filtering
 - Image upload functionality
 - Inventory alerts for low stock
 - User roles and permissions
-- Docker containerization
+- Load balancing and scaling
+- CI/CD pipeline integration
 
 ## 🛠️ Tech Stack
 
@@ -69,13 +77,57 @@ A full-stack inventory management application with JWT authentication, built wit
 - **Icons**: Heroicons
 - **State Management**: React Context API
 
+### DevOps & Deployment
+- **Containerization**: Docker & Docker Compose
+- **Web Server**: Nginx (production)
+- **Database**: MongoDB with persistent volumes
+- **Environment**: Multi-stage builds for optimization
+
 ## 📋 Prerequisites
 
+- Docker and Docker Compose
+- Git (for cloning the repository)
+
+**Or for local development:**
 - Node.js (v18 or higher)
 - MongoDB (local or cloud instance)
 - npm or yarn package manager
 
 ## 🚀 Getting Started
+
+### 🐳 Docker Deployment (Recommended)
+
+**Quick Start - Run the entire application with one command:**
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/opabhijeet/Fi_Money.git
+   cd Fi_Money
+   ```
+
+2. **Create environment file**
+   ```bash
+   cp .env.example .env
+   # Edit .env with your preferred values
+   ```
+
+3. **Start all services**
+   ```bash
+   docker-compose up -d
+   ```
+
+4. **Access the application**
+   - **Frontend**: http://localhost (port 80)
+   - **Backend API**: http://localhost:8080/api
+   - **API Documentation**: http://localhost:8080/api-docs
+   - **MongoDB**: localhost:27017
+
+5. **Stop the application**
+   ```bash
+   docker-compose down
+   ```
+
+### 🔧 Local Development Setup
 
 ### Backend Setup
 
@@ -132,9 +184,9 @@ A full-stack inventory management application with JWT authentication, built wit
    - Frontend URL: `http://localhost:3000`
    - The frontend will proxy API requests to the backend server
 
-### Running Both Servers
+### 🔄 Local Development - Running Both Servers
 
-For the complete application, you need to run both servers:
+For local development, you need to run both servers:
 
 1. **Terminal 1 - Backend**:
    ```bash
@@ -149,6 +201,31 @@ For the complete application, you need to run both servers:
    ```
 
 Then visit `http://localhost:3000` to use the full application.
+
+## 🐳 Docker Information
+
+### Services
+- **Frontend**: React app served by Nginx on port 80
+- **Backend**: Express.js API on port 8080  
+- **Database**: MongoDB on port 27017
+
+### Docker Commands
+```bash
+# Build and start all services
+docker-compose up -d
+
+# View logs
+docker-compose logs -f
+
+# Stop all services
+docker-compose down
+
+# Rebuild images
+docker-compose build --no-cache
+
+# Remove volumes (WARNING: deletes database data)
+docker-compose down -v
+```
 
 ## 📚 API Endpoints
 
@@ -211,7 +288,10 @@ You can test the API using:
 
 ```
 Fi_Money/
+├── docker-compose.yml       # Docker Compose configuration
+├── .env                     # Environment variables
 ├── Backend/                 # Express.js API Server
+│   ├── Dockerfile          # Backend container configuration
 │   ├── controllers/         # Route handlers
 │   │   ├── auth/
 │   │   │   ├── login.js
@@ -233,6 +313,7 @@ Fi_Money/
 │   ├── package.json
 │   └── test_api.py          # API testing script
 ├── Frontend/                # React Application
+│   ├── Dockerfile          # Frontend container configuration
 │   ├── public/
 │   ├── src/
 │   │   ├── components/      # Reusable React components
@@ -284,3 +365,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - MongoDB for flexible document storage
 - Swagger for excellent API documentation
 - JWT for secure authentication
+- Docker for seamless containerization and deployment
+- Nginx for efficient static file serving
